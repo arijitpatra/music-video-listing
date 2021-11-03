@@ -2,10 +2,32 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #aaa;
   background: #fff;
-  & img {
-    width: 522px;
-    height: 292px;
+  width: 360px;
+
+  h2 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0.5rem 0;
+    width: 310px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  h5 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 310px;
+    text-align: center;
+    font-weight: 400;
+  }
+
+  img {
+    // width: 522px;
+    // height: 292px;
+    width: 360px;
+    height: 201px;
   }
 }

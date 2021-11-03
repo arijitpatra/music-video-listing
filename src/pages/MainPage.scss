@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background: #3c3c3c;
+  background: #efefef;
   padding: 5rem;
 }
 
@@ -14,11 +14,16 @@
   align-items: center;
   position: sticky;
   top: 0;
-  background: #ffed16;
+  background: #fff;
+  border-bottom: 1px solid #efefef;
 
   h1 {
     display: flex;
     flex: 1;
     margin: 1rem;
+
+    @media screen and (max-width: 700px) {
+      font-size: 1rem;
+    }
   }
 }
