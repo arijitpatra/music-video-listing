@@ -33,6 +33,16 @@ export const MainPage = () => {
     }
   };
 
+  const generateCard = () =>
+    filteredData.map((i) => (
+      <Card
+        key={i.id}
+        image_url={i.image_url}
+        artist={i.artist}
+        title={i.title}
+      />
+    ));
+
   useEffect(() => {
     fetch(
       "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
@@ -49,15 +59,8 @@ export const MainPage = () => {
       </div>
       <div className="container">
         {filteredData
-          ? filteredData.map((i) => (
-              <Card
-                key={i.id}
-                image_url={i.image_url}
-                artist={i.artist}
-                title={i.title}
-              />
-            ))
-          : "Loading"}
+          ? generateCard()
+          : "Getting the best music videos for you..."}
       </div>
     </>
   );
