@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Card } from "../components/Card";
+import { Search } from "../components/Search";
 import "./MainPage.scss";
 
 export const MainPage = () => {
   const [masterData, setMasterData] = useState();
+  const [filteredData, setFilteredData] = useState();
 
   const manipulateData = (data) => {
     const { genres, videos } = data;
@@ -11,6 +13,24 @@ export const MainPage = () => {
     console.log(videos);
 
     setMasterData(data);
+    setFilteredData(videos);
+  };
+
+  const handleOnChange = (e) => {
+    console.log(e.target.value);
+    const { value } = e.target;
+    if (value) {
+      let filteredDataLocal = masterData.videos.filter((i) => {
+        console.log(i);
+        return (
+          i.artist.toString().toLowerCase().includes(value.toLowerCase()) ||
+          i.title.toString().toLowerCase().includes(value.toLowerCase())
+        );
+      });
+      setFilteredData(filteredDataLocal);
+    } else {
+      setFilteredData(masterData.videos);
+    }
   };
 
   useEffect(() => {
@@ -22,17 +42,23 @@ export const MainPage = () => {
   }, []);
 
   return (
-    <div className="container">
-      {masterData
-        ? masterData.videos.map((i) => (
-            <Card
-              key={i.id}
-              image_url={i.image_url}
-              artist={i.artist}
-              title={i.title}
-            />
-          ))
-        : "Loading"}
-    </div>
+    <>
+      <div className="header">
+        <h1>XITE TV - Music Video Listing</h1>
+        <Search onChange={handleOnChange} />
+      </div>
+      <div className="container">
+        {filteredData
+          ? filteredData.map((i) => (
+              <Card
+                key={i.id}
+                image_url={i.image_url}
+                artist={i.artist}
+                title={i.title}
+              />
+            ))
+          : "Loading"}
+      </div>
+    </>
   );
 };

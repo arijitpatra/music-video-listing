@@ -1,7 +1,24 @@
 .container {
   grid-gap: 16px;
-  display: flex;
+  display: flex; // TODO: makle it grid
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  background: #3c3c3c;
+  padding: 5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: #ffed16;
+
+  h1 {
+    display: flex;
+    flex: 1;
+    margin: 1rem;
+  }
 }

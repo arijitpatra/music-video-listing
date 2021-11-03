@@ -3,4 +3,9 @@ section {
   flex-direction: column;
   align-items: center;
   border: 1px solid #aaa;
+  background: #fff;
+  & img {
+    width: 522px;
+    height: 292px;
+  }
 }
