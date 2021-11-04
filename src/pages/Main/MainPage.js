@@ -44,16 +44,15 @@ export const MainPage = () => {
   };
 
   const handleOnChangeForReleaseYear = (e, data) => {
-    console.log(data);
-    // const { value } = e.target;
-    // if (value === "all") {
-    //   setFilteredData(masterData.videos);
-    // } else {
-    //   let filteredDataLocal = filteredData.filter((i) => {
-    //     return i.release_year.toString() === value;
-    //   });
-    //   setFilteredData(filteredDataLocal);
-    // }
+    const { value } = data;
+    if (value === "all" || value === "") {
+      setFilteredData(masterData.videos);
+    } else {
+      let filteredDataLocal = filteredData.filter((i) => {
+        return i.release_year === value;
+      });
+      setFilteredData(filteredDataLocal);
+    }
   };
 
   const generateCard = () =>
@@ -79,23 +78,29 @@ export const MainPage = () => {
   return (
     <>
       <div className="header">
-        <h1>XITE TV - Music Video Listing</h1>
-        <Search onChange={handleOnChange} />
         <div>
-          {filteredData && (
-            <Dropdown
-              data={getAllReleaseYear(filteredData)}
-              placeholder="Select Year"
-              onChange={handleOnChangeForReleaseYear}
-            />
-          )}
-          {filteredData && (
-            <Dropdown
-              data={getAllReleaseYear(filteredData)}
-              placeholder="Select Year"
-              onChange={handleOnChangeForReleaseYear}
-            />
-          )}
+          <h1>XITE TV - Music Video Listing</h1>
+          <Search onChange={handleOnChange} />
+        </div>
+        <div>
+          <div>
+            {filteredData && (
+              <Dropdown
+                data={getAllReleaseYear(filteredData)}
+                placeholder="Select Year"
+                onChange={handleOnChangeForReleaseYear}
+              />
+            )}
+          </div>
+          <div>
+            {filteredData && (
+              <Dropdown
+                data={getAllReleaseYear(filteredData)}
+                placeholder="Select Genre"
+                onChange={handleOnChangeForReleaseYear}
+              />
+            )}
+          </div>
         </div>
       </div>
       <div className="container">

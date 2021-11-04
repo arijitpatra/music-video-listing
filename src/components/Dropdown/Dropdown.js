@@ -20,7 +20,14 @@ export const Dropdown = ({ placeholder, data, onChange }) => {
       //multiple
       //search
       selection
-      options={stateOptions}
+      options={[
+        {
+          key: "all",
+          text: "All",
+          value: "all",
+        },
+        ...stateOptions,
+      ]}
       onChange={onChange}
       clearable
     />

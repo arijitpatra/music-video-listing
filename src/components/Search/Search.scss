@@ -1,12 +1,13 @@
 input {
-  display: flex;
-  flex: 1;
-  margin: 1rem;
+  width: 100%;
   padding: 1rem;
   font-size: 18px;
   border-radius: 50px;
   border: 1px solid #efefef;
   font-family: "Source Sans Pro", sans-serif;
+  //   background: url("https://www.pinclipart.com/picdir/big/93-937805_bobcat-footprint-clipart-search-icon-svg-white-png.png")
+  //     no-repeat scroll 7px 7px;
+  //   padding-left: 30px;
   &:focus-visible {
     outline: none;
   }
