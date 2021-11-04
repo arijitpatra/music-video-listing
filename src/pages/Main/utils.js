@@ -18,3 +18,13 @@ export const getGenreNameFromGenreId = (data, id) => {
     return data[168].name; // 168 is for others
   }
 };
+
+// TODO - move to parents utils
+// This function returns an unique array
+export const makeUniqueArray = (data) => {
+  return [...new Set(data)];
+};
+
+export const getAllReleaseYear = (data) => {
+  return makeUniqueArray(data.map((i) => i.release_year));
+};

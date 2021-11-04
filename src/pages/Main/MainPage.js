@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { Search } from "../../components/Search";
+import { Dropdown } from "../../components/Dropdown";
 import "./MainPage.scss";
 import {
   createIndexedGenreObjectMapping,
   getGenreNameFromGenreId,
+  getAllReleaseYear,
 } from "./utils";
 
 export const MainPage = () => {
@@ -16,7 +18,6 @@ export const MainPage = () => {
     const { genres, videos } = data;
     console.log(genres);
     console.log(videos);
-
     setMasterData(data);
     setFilteredData(videos);
 
@@ -24,11 +25,9 @@ export const MainPage = () => {
   };
 
   const handleOnChange = (e) => {
-    console.log(e.target.value);
     const { value } = e.target;
     if (value) {
       let filteredDataLocal = masterData.videos.filter((i) => {
-        console.log(i);
         return (
           i.artist.toString().toLowerCase().includes(value.toLowerCase()) ||
           i.title.toString().toLowerCase().includes(value.toLowerCase()) ||
@@ -41,6 +40,18 @@ export const MainPage = () => {
       setFilteredData(filteredDataLocal);
     } else {
       setFilteredData(masterData.videos);
+    }
+  };
+
+  const handleOnChangeForReleaseYear = (e) => {
+    const { value } = e.target;
+    if (value === "all") {
+      setFilteredData(masterData.videos);
+    } else {
+      let filteredDataLocal = filteredData.filter((i) => {
+        return i.release_year.toString() === value;
+      });
+      setFilteredData(filteredDataLocal);
     }
   };
 
@@ -69,6 +80,13 @@ export const MainPage = () => {
       <div className="header">
         <h1>XITE TV - Music Video Listing</h1>
         <Search onChange={handleOnChange} />
+        {filteredData && (
+          <Dropdown
+            data={getAllReleaseYear(filteredData)}
+            placeholder="Select Year"
+            onChange={handleOnChangeForReleaseYear}
+          />
+        )}
       </div>
       <div className="container">
         {filteredData && idGenreMapping
