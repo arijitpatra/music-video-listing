@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { Search } from "../../components/Search";
 import { Dropdown } from "../../components/Dropdown";
+import Headroom from "react-headroom";
 import "./MainPage.scss";
 import {
   createIndexedGenreObjectMapping,
@@ -77,32 +78,34 @@ export const MainPage = () => {
 
   return (
     <>
-      <div className="header">
-        <div>
-          <h1>XITE TV - Music Video Listing</h1>
-          <Search onChange={handleOnChange} />
-        </div>
-        <div>
+      <Headroom>
+        <div className="header">
           <div>
-            {filteredData && (
-              <Dropdown
-                data={getAllReleaseYear(filteredData)}
-                placeholder="Select Year"
-                onChange={handleOnChangeForReleaseYear}
-              />
-            )}
+            <h1>XITE TV - Music Video Listing</h1>
+            <Search onChange={handleOnChange} />
           </div>
           <div>
-            {filteredData && (
-              <Dropdown
-                data={getAllReleaseYear(filteredData)}
-                placeholder="Select Genre"
-                onChange={handleOnChangeForReleaseYear}
-              />
-            )}
+            <div>
+              {filteredData && (
+                <Dropdown
+                  data={getAllReleaseYear(filteredData)}
+                  placeholder="Select Year"
+                  onChange={handleOnChangeForReleaseYear}
+                />
+              )}
+            </div>
+            <div>
+              {filteredData && (
+                <Dropdown
+                  data={getAllReleaseYear(filteredData)}
+                  placeholder="Select Genre"
+                  onChange={handleOnChangeForReleaseYear}
+                />
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      </Headroom>
       <div className="container">
         {filteredData && idGenreMapping
           ? generateCard()
