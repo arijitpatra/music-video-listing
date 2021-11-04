@@ -43,16 +43,17 @@ export const MainPage = () => {
     }
   };
 
-  const handleOnChangeForReleaseYear = (e) => {
-    const { value } = e.target;
-    if (value === "all") {
-      setFilteredData(masterData.videos);
-    } else {
-      let filteredDataLocal = filteredData.filter((i) => {
-        return i.release_year.toString() === value;
-      });
-      setFilteredData(filteredDataLocal);
-    }
+  const handleOnChangeForReleaseYear = (e, data) => {
+    console.log(data);
+    // const { value } = e.target;
+    // if (value === "all") {
+    //   setFilteredData(masterData.videos);
+    // } else {
+    //   let filteredDataLocal = filteredData.filter((i) => {
+    //     return i.release_year.toString() === value;
+    //   });
+    //   setFilteredData(filteredDataLocal);
+    // }
   };
 
   const generateCard = () =>
@@ -80,13 +81,22 @@ export const MainPage = () => {
       <div className="header">
         <h1>XITE TV - Music Video Listing</h1>
         <Search onChange={handleOnChange} />
-        {filteredData && (
-          <Dropdown
-            data={getAllReleaseYear(filteredData)}
-            placeholder="Select Year"
-            onChange={handleOnChangeForReleaseYear}
-          />
-        )}
+        <div>
+          {filteredData && (
+            <Dropdown
+              data={getAllReleaseYear(filteredData)}
+              placeholder="Select Year"
+              onChange={handleOnChangeForReleaseYear}
+            />
+          )}
+          {filteredData && (
+            <Dropdown
+              data={getAllReleaseYear(filteredData)}
+              placeholder="Select Year"
+              onChange={handleOnChangeForReleaseYear}
+            />
+          )}
+        </div>
       </div>
       <div className="container">
         {filteredData && idGenreMapping
