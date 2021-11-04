@@ -1,5 +1,5 @@
 import "./App.scss";
-import { MainPage } from "./pages/MainPage"; // TODO: Pages
+import { MainPage } from "./pages/Main/MainPage"; // TODO: Pages
 
 function App() {
   document.addEventListener("DOMContentLoaded", function () {

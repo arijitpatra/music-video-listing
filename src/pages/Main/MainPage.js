@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { Card } from "../components/Card";
-import { Search } from "../components/Search";
+import { Card } from "../../components/Card";
+import { Search } from "../../components/Search";
 import "./MainPage.scss";
+import {
+  createIndexedGenreObjectMapping,
+  getGenreNameFromGenreId,
+} from "./utils";
 
 export const MainPage = () => {
   const [masterData, setMasterData] = useState();
   const [filteredData, setFilteredData] = useState();
+  const [idGenreMapping, setIdGenreMapping] = useState(); // make a normal const and put outside the function
 
   const manipulateData = (data) => {
     const { genres, videos } = data;
@@ -14,6 +19,8 @@ export const MainPage = () => {
 
     setMasterData(data);
     setFilteredData(videos);
+
+    setIdGenreMapping(createIndexedGenreObjectMapping(genres));
   };
 
   const handleOnChange = (e) => {
@@ -24,7 +31,11 @@ export const MainPage = () => {
         console.log(i);
         return (
           i.artist.toString().toLowerCase().includes(value.toLowerCase()) ||
-          i.title.toString().toLowerCase().includes(value.toLowerCase())
+          i.title.toString().toLowerCase().includes(value.toLowerCase()) ||
+          getGenreNameFromGenreId(idGenreMapping, i.genre_id)
+            .toString()
+            .toLowerCase()
+            .includes(value.toLowerCase())
         );
       });
       setFilteredData(filteredDataLocal);
@@ -40,6 +51,7 @@ export const MainPage = () => {
         image_url={i.image_url}
         artist={i.artist}
         title={i.title}
+        genre={getGenreNameFromGenreId(idGenreMapping, i.genre_id)}
       />
     ));
 
@@ -49,6 +61,7 @@ export const MainPage = () => {
     )
       .then((response) => response.json())
       .then((data) => manipulateData(data));
+    // TODO: handle failure cases here and then loader should stop and say the error
   }, []);
 
   return (
@@ -58,7 +71,7 @@ export const MainPage = () => {
         <Search onChange={handleOnChange} />
       </div>
       <div className="container">
-        {filteredData
+        {filteredData && idGenreMapping
           ? generateCard()
           : "Getting the best music videos for you..."}
       </div>
