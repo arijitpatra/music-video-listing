@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Card } from "../../components/Card";
 import { Search } from "../../components/Search";
 import { Dropdown } from "../../components/Dropdown";
+import { TagFilter } from "../../components/TagFilter";
 import Headroom from "react-headroom";
 import "./MainPage.scss";
 import {
@@ -46,13 +47,26 @@ export const MainPage = () => {
 
   const handleOnChangeForReleaseYear = (e, data) => {
     const { value } = data;
-    if (value === "all" || value === "") {
+    if (["all", ""].includes(value)) {
       setFilteredData(masterData.videos);
     } else {
       let filteredDataLocal = filteredData.filter((i) => {
         return i.release_year === value;
       });
       setFilteredData(filteredDataLocal);
+    }
+  };
+
+  const handleOnChangeForGenreTags = (e, data) => {
+    const { value } = data;
+    if (value.length > 0) {
+      let filteredDataLocal = masterData.videos.filter((i) => {
+        const genreName = getGenreNameFromGenreId(idGenreMapping, i.genre_id);
+        return value.includes(genreName);
+      });
+      setFilteredData(filteredDataLocal);
+    } else {
+      setFilteredData(masterData.videos);
     }
   };
 
@@ -96,10 +110,10 @@ export const MainPage = () => {
             </div>
             <div>
               {filteredData && (
-                <Dropdown
-                  data={getAllReleaseYear(filteredData)}
+                <TagFilter
+                  data={masterData.genres.map((i) => i.name)}
                   placeholder="Select Genre"
-                  onChange={handleOnChangeForReleaseYear}
+                  onChange={handleOnChangeForGenreTags}
                 />
               )}
             </div>

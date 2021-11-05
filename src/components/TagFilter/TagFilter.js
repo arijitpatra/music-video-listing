@@ -1,4 +1,4 @@
-import "./Dropdown.scss";
+import "./TagFilter.scss";
 import { Dropdown as DropdownSemantic } from "semantic-ui-react";
 
 // TODO : move to a higher level utils
@@ -6,7 +6,7 @@ const makeDataChronological = (data) => {
   return data.sort();
 };
 
-export const Dropdown = ({ placeholder, data, onChange }) => {
+export const TagFilter = ({ placeholder, data, onChange }) => {
   const stateOptions = makeDataChronological(data).map((i) => ({
     key: i,
     text: i,
@@ -17,14 +17,15 @@ export const Dropdown = ({ placeholder, data, onChange }) => {
     <DropdownSemantic
       placeholder={placeholder}
       fluid
+      multiple
       search
       selection
       options={[
-        {
-          key: "all",
-          text: "All",
-          value: "all",
-        },
+        // {
+        //   key: "all",
+        //   text: "All",
+        //   value: "all",
+        // },
         ...stateOptions,
       ]}
       onChange={onChange}
