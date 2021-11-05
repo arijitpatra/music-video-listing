@@ -2,12 +2,9 @@ input {
   width: 100%;
   padding: 1rem;
   font-size: 18px;
-  border-radius: 50px;
   border: 1px solid #efefef;
   font-family: "Source Sans Pro", sans-serif;
-  //   background: url("https://www.pinclipart.com/picdir/big/93-937805_bobcat-footprint-clipart-search-icon-svg-white-png.png")
-  //     no-repeat scroll 7px 7px;
-  //   padding-left: 30px;
+  border-radius: 5px;
   &:focus-visible {
     outline: none;
   }

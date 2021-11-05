@@ -17,7 +17,6 @@ export const Dropdown = ({ placeholder, data, onChange }) => {
     <DropdownSemantic
       placeholder={placeholder}
       fluid
-      search
       selection
       options={[
         {

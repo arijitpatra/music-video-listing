@@ -94,11 +94,12 @@ export const MainPage = () => {
     <>
       <Headroom>
         <div className="header">
-          <div>
-            <h1>XITE TV - Music Video Listing</h1>
-          </div>
-          <Search onChange={handleOnChange} />
-          <div style={{ display: "flex" }}>
+          <h1>XITE TV - Music Video Listing</h1>
+          <Search
+            onChange={handleOnChange}
+            placeholder="Search artist, title, genre..."
+          />
+          <div class="moreFilters">
             {filteredData && (
               <TagFilter
                 data={masterData.genres.map((i) => i.name)}
