@@ -4,6 +4,9 @@ section {
   align-items: center;
   background: #fff;
   width: 360px;
+  @media screen and (max-width: 875px) {
+    width: 180px;
+  }
 
   h2 {
     overflow: hidden;
@@ -12,6 +15,10 @@ section {
     width: 310px;
     text-align: center;
     font-weight: 600;
+    @media screen and (max-width: 875px) {
+      width: 130px;
+      font-size: 1rem;
+    }
   }
 
   h5 {
@@ -21,6 +28,11 @@ section {
     width: 310px;
     text-align: center;
     font-weight: 400;
+    @media screen and (max-width: 875px) {
+      width: 130px;
+      font-size: 12px;
+      margin: 0;
+    }
   }
 
   img {
@@ -28,5 +40,9 @@ section {
     // height: 292px;
     width: 360px;
     height: 201px;
+    @media screen and (max-width: 875px) {
+      width: 180px;
+      height: 101px;
+    }
   }
 }
