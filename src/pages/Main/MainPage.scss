@@ -7,7 +7,7 @@
   background: #efefef;
   padding: 5rem;
   @media screen and (max-width: 875px) {
-    padding: 0;
+    padding: 1rem 0;
   }
 }
 
@@ -20,12 +20,13 @@
   flex-direction: column;
   padding: 0.5rem 15rem;
   @media screen and (max-width: 875px) {
-    padding: 0 1rem;
+    padding: 1rem;
   }
 
   h1 {
     @media screen and (max-width: 875px) {
       text-align: center;
+      font-size: 21px;
     }
   }
 
