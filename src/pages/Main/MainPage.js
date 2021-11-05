@@ -86,7 +86,8 @@ export const MainPage = () => {
       "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
     )
       .then((response) => response.json())
-      .then((data) => manipulateData(data));
+      .then((data) => manipulateData(data))
+      .catch((e) => console.log(e));
     // TODO: handle failure cases here and then loader should stop and say the error
   }, []);
 
@@ -95,10 +96,12 @@ export const MainPage = () => {
       <Headroom>
         <div className="header">
           <h1>XITE TV - Music Video Listing</h1>
-          <Search
-            onChange={handleOnChange}
-            placeholder="Search artist, title, genre..."
-          />
+          {filteredData && (
+            <Search
+              onChange={handleOnChange}
+              placeholder="Search artist, title, genre..."
+            />
+          )}
           <div class="moreFilters">
             {filteredData && (
               <TagFilter
