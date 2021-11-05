@@ -96,27 +96,23 @@ export const MainPage = () => {
         <div className="header">
           <div>
             <h1>XITE TV - Music Video Listing</h1>
-            <Search onChange={handleOnChange} />
           </div>
-          <div>
-            <div>
-              {filteredData && (
-                <Dropdown
-                  data={getAllReleaseYear(filteredData)}
-                  placeholder="Select Year"
-                  onChange={handleOnChangeForReleaseYear}
-                />
-              )}
-            </div>
-            <div>
-              {filteredData && (
-                <TagFilter
-                  data={masterData.genres.map((i) => i.name)}
-                  placeholder="Select Genre"
-                  onChange={handleOnChangeForGenreTags}
-                />
-              )}
-            </div>
+          <Search onChange={handleOnChange} />
+          <div style={{ display: "flex" }}>
+            {filteredData && (
+              <TagFilter
+                data={masterData.genres.map((i) => i.name)}
+                placeholder="Select Genre"
+                onChange={handleOnChangeForGenreTags}
+              />
+            )}
+            {filteredData && (
+              <Dropdown
+                data={getAllReleaseYear(filteredData)}
+                placeholder="Select Year"
+                onChange={handleOnChangeForReleaseYear}
+              />
+            )}
           </div>
         </div>
       </Headroom>
