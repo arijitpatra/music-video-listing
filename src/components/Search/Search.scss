@@ -8,4 +8,8 @@ input {
   &:focus-visible {
     outline: none;
   }
+  &:focus {
+    box-shadow: 0px 3px 9px rgba(34, 36, 38, 0.15);
+    transition: 0.2s;
+  }
 }
