@@ -1,7 +1,15 @@
 import { Icon } from "semantic-ui-react";
+import { FC } from "react";
 import "./Card.scss";
 
-export const Card = ({ image_url, artist, title, genre }) => {
+interface ICardProps {
+  image_url: string;
+  artist: string;
+  title: string;
+  genre: string;
+}
+
+export const Card: FC<ICardProps> = ({ image_url, artist, title, genre }) => {
   return (
     <section>
       <img loading="lazy" src={image_url} alt={`${artist}-${title}`} />

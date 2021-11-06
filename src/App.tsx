@@ -1,35 +1,13 @@
+// @ts-nocheck
+import { MainPage } from "./pages/Main";
+import { useNavigatorOnLine } from "./hooks/useNavigatorOnLine";
 import "./App.scss";
-import { MainPage } from "./pages/Main/MainPage"; // TODO: Pages
-import { useState, useEffect } from "react";
-
-// TODO: MOVE THIS AND BELOW CUSTOM HOOK TO COMMON
-const getOnLineStatus = () =>
-  typeof navigator !== "undefined" && typeof navigator.onLine === "boolean"
-    ? navigator.onLine
-    : true;
-
-const useNavigatorOnLine = () => {
-  const [status, setStatus] = useState(getOnLineStatus());
-
-  const setOnline = () => setStatus(true);
-  const setOffline = () => setStatus(false);
-
-  useEffect(() => {
-    window.addEventListener("online", setOnline);
-    window.addEventListener("offline", setOffline);
-
-    return () => {
-      window.removeEventListener("online", setOnline);
-      window.removeEventListener("offline", setOffline);
-    };
-  }, []);
-
-  return status;
-};
 
 function App() {
   const isOnline = useNavigatorOnLine();
 
+  /* Lazy loading helper,
+  it is a plugged in piece of code */
   document.addEventListener("DOMContentLoaded", function () {
     var lazyloadImages = document.querySelectorAll("img.lazy");
     var lazyloadThrottleTimeout;
