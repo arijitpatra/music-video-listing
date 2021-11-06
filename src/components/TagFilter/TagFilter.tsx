@@ -1,5 +1,6 @@
 import { FC, SyntheticEvent } from "react";
 import { Dropdown as DropdownSemantic, DropdownProps } from "semantic-ui-react";
+import { makeStateOptions } from "../../utils";
 import "./TagFilter.scss";
 
 interface ITagFilterProps {
@@ -11,24 +12,11 @@ interface ITagFilterProps {
   ) => void;
 }
 
-// TODO : move to a higher level utils
-const makeDataChronological = (data: any) => {
-  return data.sort();
-};
-
 export const TagFilter: FC<ITagFilterProps> = ({
   placeholder,
   data,
   onChange,
 }) => {
-  const stateOptions = makeDataChronological(data).map(
-    (i: string | number) => ({
-      key: i,
-      text: i,
-      value: i,
-    })
-  );
-
   return (
     <DropdownSemantic
       placeholder={placeholder}
@@ -36,7 +24,7 @@ export const TagFilter: FC<ITagFilterProps> = ({
       multiple
       search
       selection
-      options={[...stateOptions]}
+      options={[...makeStateOptions(data)]}
       onChange={onChange}
       clearable
     />

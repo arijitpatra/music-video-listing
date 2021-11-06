@@ -9,7 +9,7 @@ import {
   createIndexedGenreObjectMapping,
   getGenreNameFromGenreId,
   getAllReleaseYear,
-} from "./utils";
+} from "../../utils";
 
 interface IMusicVideoListing {
   genres?: IGenre[] | null;
@@ -42,75 +42,63 @@ export const MainPage = () => {
     setIdGenreMapping(createIndexedGenreObjectMapping(genres));
   }, []);
 
-  const handleOnChange = useCallback((e: any) => {
-    const { value } = e.target;
-    if (value) {
-      let filteredDataLocal: IVideos[] = masterData.videos.filter((i: any) => {
-        return (
-          i.artist.toString().toLowerCase().includes(value.toLowerCase()) ||
-          i.title.toString().toLowerCase().includes(value.toLowerCase()) ||
-          getGenreNameFromGenreId(idGenreMapping, i.genre_id)
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
+  const handleOnChange = useCallback(
+    (e: any) => {
+      const { value } = e.target;
+      if (value) {
+        let filteredDataLocal: IVideos[] = masterData.videos.filter(
+          (i: any) => {
+            return (
+              i.artist.toString().toLowerCase().includes(value.toLowerCase()) ||
+              i.title.toString().toLowerCase().includes(value.toLowerCase()) ||
+              getGenreNameFromGenreId(idGenreMapping, i.genre_id)
+                .toString()
+                .toLowerCase()
+                .includes(value.toLowerCase())
+            );
+          }
         );
-      });
-      setFilteredData(filteredDataLocal);
-    } else {
-      setFilteredData(masterData.videos);
-    }
-  }, [idGenreMapping, masterData.videos]);
+        setFilteredData(filteredDataLocal);
+      } else {
+        setFilteredData(masterData.videos);
+      }
+    },
+    [idGenreMapping, masterData.videos]
+  );
 
-  const handleOnChangeForReleaseYear = useCallback((e: any, data: any) => {
-    const { value } = data;
-    if (["all", ""].includes(value)) {
-      setFilteredData(masterData.videos);
-    } else {
-      let filteredDataLocal = filteredData.filter((i: any) => {
-        return i.release_year === value;
-      });
-      setFilteredData(filteredDataLocal);
-    }
-  },[filteredData, masterData.videos]);
+  const handleOnChangeForReleaseYear = useCallback(
+    (e: any, data: any) => {
+      const { value } = data;
+      if (["all", ""].includes(value)) {
+        setFilteredData(masterData.videos);
+      } else {
+        let filteredDataLocal = filteredData.filter((i: any) => {
+          return i.release_year === value;
+        });
+        setFilteredData(filteredDataLocal);
+      }
+    },
+    [filteredData, masterData.videos]
+  );
 
-  const handleOnChangeForGenreTags = useCallback((e: any, data: any) => {
-    const { value } = data;
-    if (value.length > 0) {
-      let filteredDataLocal = masterData.videos.filter((i: any) => {
-        const genreName = getGenreNameFromGenreId(idGenreMapping, i.genre_id);
-        return value.includes(genreName);
-      });
-      setFilteredData(filteredDataLocal);
-    } else {
-      setFilteredData(masterData.videos);
-    }
-  },[idGenreMapping, masterData.videos]);
+  const handleOnChangeForGenreTags = useCallback(
+    (e: any, data: any) => {
+      const { value } = data;
+      if (value.length > 0) {
+        let filteredDataLocal = masterData.videos.filter((i: any) => {
+          const genreName = getGenreNameFromGenreId(idGenreMapping, i.genre_id);
+          return value.includes(genreName);
+        });
+        setFilteredData(filteredDataLocal);
+      } else {
+        setFilteredData(masterData.videos);
+      }
+    },
+    [idGenreMapping, masterData.videos]
+  );
 
-  const generateCard = () =>
-    filteredData.map((i: any) => (
-      <Card
-        key={i.id}
-        image_url={i.image_url}
-        artist={i.artist}
-        title={i.title}
-        genre={getGenreNameFromGenreId(idGenreMapping, i.genre_id)}
-      />
-    ));
-  
-  // on component mount 
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
-    )
-      .then((response) => response.json())
-      .then((data) => manipulateData(data))
-      .catch((e) => {});
-    // TODO: handle failure cases here and then loader should stop and say the error
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <>
+  const getHeader = () => {
+    return (
       <Headroom>
         <div className="header">
           <h1>Music Video Listing</h1>
@@ -138,6 +126,35 @@ export const MainPage = () => {
           </div>
         </div>
       </Headroom>
+    );
+  };
+
+  const generateCard = () =>
+    filteredData.map((i: any) => (
+      <Card
+        key={i.id}
+        image_url={i.image_url}
+        artist={i.artist}
+        title={i.title}
+        genre={getGenreNameFromGenreId(idGenreMapping, i.genre_id)}
+      />
+    ));
+
+  // Hook runs on component mount
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
+    )
+      .then((response) => response.json())
+      .then((data) => manipulateData(data))
+      .catch((e) => {});
+    // TODO: handle failure cases here and then loader should stop and say the error
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      {getHeader()}
       <div className="container">
         {filteredData && idGenreMapping
           ? generateCard()
