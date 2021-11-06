@@ -1,13 +1,19 @@
 .container {
-  grid-gap: 16px;
-  display: flex; // TODO: makle it grid
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 1rem;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
   background: #efefef;
   padding: 5rem;
+  @media screen and (max-width: 1600px) {
+    grid-template-columns: auto auto auto;
+  }
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: auto auto;
+  }
   @media screen and (max-width: 875px) {
     padding: 1rem 0;
+    grid-template-columns: auto auto;
   }
 }
 
@@ -35,6 +41,9 @@
     margin: 1rem 0;
     > div {
       margin: 1rem;
+    }
+    @media screen and (max-width: 875px) {
+      margin: 0;
     }
   }
 }

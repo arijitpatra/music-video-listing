@@ -106,7 +106,7 @@ export const MainPage = () => {
             {filteredData && (
               <TagFilter
                 data={masterData.genres.map((i) => i.name)}
-                placeholder="Select Genre"
+                placeholder="Select Genres"
                 onChange={handleOnChangeForGenreTags}
               />
             )}
