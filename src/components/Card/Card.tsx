@@ -11,7 +11,7 @@ interface ICardProps {
 
 export const Card: FC<ICardProps> = ({ image_url, artist, title, genre }) => {
   return (
-    <section>
+    <section className="d-f fd-c ai-c" data-testid="test-card">
       <img loading="lazy" src={image_url} alt={`${artist}-${title}`} />
       <h3 title={artist}>{artist}</h3>
       <h5 title={title}>{title}</h5>

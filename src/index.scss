@@ -1,20 +1,44 @@
+@import "./styles/variables.scss";
+
 body {
   margin: 0;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: $font-family;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #efefef;
-  color: #31393f;
+  background: $bg-color;
+  color: $charcoal;
 }
 
-// TODO - add all helper css classes here and reuse
+.d-g {
+  display: grid;
+}
 
 .d-f {
   display: flex;
 }
 
-.fs-10 {
-  font-size: 10px;
+.fd-c {
+  flex-direction: column;
+}
+
+.jc-c {
+  justify-content: center;
+}
+
+.ai-c {
+  align-items: center;
+}
+
+.p-sticky {
+  position: sticky;
+}
+
+.ta-c {
+  text-align: center;
+}
+
+.w-100 {
+  width: 100%;
 }
 
 .ui.multiple.search.dropdown > input.search {

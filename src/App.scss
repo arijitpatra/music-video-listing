@@ -1,0 +1,15 @@
+@import "./styles/variables";
+@import "./index.scss";
+
+.navigatorBar {
+  color: $white;
+  @extend .ta-c;
+  @extend .p-sticky;
+  top: 0;
+  &--online {
+    background: $green;
+  }
+  &--offline {
+    background: $red;
+  }
+}

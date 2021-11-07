@@ -33,6 +33,7 @@ export const Dropdown: FC<IDropDownProps> = ({
       ]}
       onChange={onChange}
       clearable
+      data-testid="test-dropdown"
     />
   );
 };

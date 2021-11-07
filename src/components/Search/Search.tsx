@@ -7,5 +7,5 @@ interface ISearchProps {
 }
 
 export const Search: FC<ISearchProps> = ({ onChange, placeholder }) => {
-  return <input type="text" placeholder={placeholder} onChange={onChange} />;
+  return <input type="text" placeholder={placeholder} onChange={onChange} data-testid="test-search"/>;
 };

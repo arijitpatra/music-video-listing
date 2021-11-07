@@ -41,27 +41,9 @@ function App() {
   return (
     <>
       {isOnline ? (
-        <div
-          style={{
-            color: "white",
-            background: "#16a116",
-            textAlign: "center",
-            position: "sticky",
-            top: 0,
-          }}
-        >
-          You are online
-        </div>
+        <div className="navigatorBar navigatorBar--online">You are online</div>
       ) : (
-        <div
-          style={{
-            color: "white",
-            background: "#cd3326",
-            textAlign: "center",
-            position: "sticky",
-            top: 0,
-          }}
-        >
+        <div className="navigatorBar navigatorBar--offline">
           You are offline, please check the internet connection
         </div>
       )}

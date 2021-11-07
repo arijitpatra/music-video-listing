@@ -1,23 +1,22 @@
+@import "../../styles/variables";
+
 section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  width: 360px;
-  @media screen and (max-width: 875px) {
-    width: 150px;
+  background: $white;
+  width: $card-width-default;
+  @media screen and (max-width: $mobile-break-point-default) {
+    width: $card-width-mobile;
   }
 
   h3 {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 310px;
+    width: calc($card-width-default - 50px);
     text-align: center;
     font-weight: 600;
     margin-bottom: 0;
-    @media screen and (max-width: 875px) {
-      width: 120px;
+    @media screen and (max-width: $mobile-break-point-default) {
+      width: calc($card-width-mobile - 30px);
       font-size: 12px;
       margin-top: 1rem;
     }
@@ -27,28 +26,26 @@ section {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 310px;
+    width: calc($card-width-default - 50px);
     text-align: center;
     font-weight: 400;
     margin-top: 14px;
-    @media screen and (max-width: 875px) {
-      width: 120px;
+    @media screen and (max-width: $mobile-break-point-default) {
+      width: calc($card-width-mobile - 30px);
       font-size: 10px;
     }
   }
 
   h6 {
-    @media screen and (max-width: 875px) {
+    @media screen and (max-width: $mobile-break-point-default) {
       margin: 0.5rem 0;
     }
   }
 
   img {
-    // width: 522px;
-    // height: 292px;
     width: 360px;
     height: 201px;
-    @media screen and (max-width: 875px) {
+    @media screen and (max-width: $mobile-break-point-default) {
       width: 150px;
       height: 84px;
     }

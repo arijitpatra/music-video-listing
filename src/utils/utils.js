@@ -1,7 +1,23 @@
+// This function returns an unique array
+export const makeUniqueArray = (data) => {
+  return [...new Set(data)];
+};
+
+// This function makes an array of all unique release years
+export const getAllReleaseYear = (data) => {
+  return makeUniqueArray(data.map((i) => i.release_year));
+};
+
+// This function checks if a string has substring
+export const checkForIncludes = (a, b) =>
+  a.toString().toLowerCase().includes(b.toLowerCase());
+
+// This function returns a sorted array
 export const sortData = (data) => {
   return data.sort();
 };
 
+// Thi sfunction creates the options input for Dropdown/TagFilter components
 export const makeStateOptions = (data) =>
   sortData(data).map((item) => ({
     key: item,
@@ -28,14 +44,4 @@ export const getGenreNameFromGenreId = (data, id) => {
   } else {
     return data[168].name; // 168 is for others
   }
-};
-
-// TODO - move to parents utils
-// This function returns an unique array
-export const makeUniqueArray = (data) => {
-  return [...new Set(data)];
-};
-
-export const getAllReleaseYear = (data) => {
-  return makeUniqueArray(data.map((i) => i.release_year));
 };

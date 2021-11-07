@@ -9,6 +9,7 @@ import {
   createIndexedGenreObjectMapping,
   getGenreNameFromGenreId,
   getAllReleaseYear,
+  checkForIncludes
 } from "../../utils";
 
 interface IMusicVideoListing {
@@ -47,14 +48,11 @@ export const MainPage = () => {
       const { value } = e.target;
       if (value) {
         let filteredDataLocal: IVideos[] = masterData.videos.filter(
-          (i: any) => {
+          (i: IVideos) => {
             return (
-              i.artist.toString().toLowerCase().includes(value.toLowerCase()) ||
-              i.title.toString().toLowerCase().includes(value.toLowerCase()) ||
-              getGenreNameFromGenreId(idGenreMapping, i.genre_id)
-                .toString()
-                .toLowerCase()
-                .includes(value.toLowerCase())
+              checkForIncludes(i.artist, value) || 
+              checkForIncludes(i.title, value) || 
+              checkForIncludes(getGenreNameFromGenreId(idGenreMapping, i.genre_id), value)
             );
           }
         );
@@ -72,7 +70,7 @@ export const MainPage = () => {
       if (["all", ""].includes(value)) {
         setFilteredData(masterData.videos);
       } else {
-        let filteredDataLocal = filteredData.filter((i: any) => {
+        let filteredDataLocal = filteredData.filter((i: IVideos) => {
           return i.release_year === value;
         });
         setFilteredData(filteredDataLocal);
@@ -85,7 +83,7 @@ export const MainPage = () => {
     (e: any, data: any) => {
       const { value } = data;
       if (value.length > 0) {
-        let filteredDataLocal = masterData.videos.filter((i: any) => {
+        let filteredDataLocal = masterData.videos.filter((i: IVideos) => {
           const genreName = getGenreNameFromGenreId(idGenreMapping, i.genre_id);
           return value.includes(genreName);
         });
@@ -100,7 +98,7 @@ export const MainPage = () => {
   const getHeader = () => {
     return (
       <Headroom>
-        <div className="header">
+        <div className="header d-f p-s fd-c">
           <h1>Music Video Listing</h1>
           {filteredData && (
             <Search
@@ -108,10 +106,10 @@ export const MainPage = () => {
               placeholder="Search artist, title, genre..."
             />
           )}
-          <div className="moreFilters">
+          <div className="moreFilters d-f">
             {filteredData && (
               <TagFilter
-                data={masterData.genres.map((i: any) => i.name)}
+                data={masterData.genres.map((i: IGenre) => i.name)}
                 placeholder="Select Genres"
                 onChange={handleOnChangeForGenreTags}
               />
@@ -155,7 +153,7 @@ export const MainPage = () => {
   return (
     <>
       {getHeader()}
-      <div className="container">
+      <div className="card-container d-g jc-c">
         {filteredData && idGenreMapping
           ? generateCard()
           : "Getting the best music videos for you..."}

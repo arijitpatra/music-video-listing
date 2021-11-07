@@ -27,6 +27,7 @@ export const TagFilter: FC<ITagFilterProps> = ({
       options={[...makeStateOptions(data)]}
       onChange={onChange}
       clearable
+      data-testid="test-tagFilter"
     />
   );
 };
