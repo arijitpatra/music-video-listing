@@ -5,7 +5,7 @@ import "./TagFilter.scss";
 
 interface ITagFilterProps {
   placeholder: string;
-  data: any;
+  data: string[];
   onChange: (
     event: SyntheticEvent<HTMLElement, Event>,
     data: DropdownProps

@@ -5,7 +5,7 @@ import "./Dropdown.scss";
 
 interface IDropDownProps {
   placeholder: string;
-  data: any;
+  data: number[];
   onChange: (
     event: SyntheticEvent<HTMLElement, Event>,
     data: DropdownProps
@@ -17,7 +17,6 @@ export const Dropdown: FC<IDropDownProps> = ({
   data,
   onChange,
 }) => {
-
   return (
     <DropdownSemantic
       placeholder={placeholder}

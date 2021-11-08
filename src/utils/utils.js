@@ -5,7 +5,7 @@ export const makeUniqueArray = (data) => {
 
 // This function makes an array of all unique release years
 export const getAllReleaseYear = (data) => {
-  return makeUniqueArray(data.map((i) => i.release_year));
+  return makeUniqueArray(data.map((item) => item.release_year));
 };
 
 // This function checks if a string has substring
@@ -27,11 +27,11 @@ export const makeStateOptions = (data) =>
 
 // This function will create a mapping with object index being the genreid and it will have name property which is the name of the genre
 export const createIndexedGenreObjectMapping = (genres) =>
-  genres.reduce((a, i) => {
+  genres.reduce((acc, item) => {
     return {
-      ...a,
-      [i.id]: {
-        name: i.name,
+      ...acc,
+      [item.id]: {
+        name: item.name,
       },
     };
   }, {});
