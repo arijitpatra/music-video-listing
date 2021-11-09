@@ -1,10 +1,20 @@
 @import "../../styles/variables.scss";
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .card-container {
   grid-template-columns: auto auto auto auto;
   grid-gap: 1rem;
   background: $bg-color;
   padding: 5rem;
+  animation: fadeIn 0.25s ease-in;
   @media screen and (max-width: 1600px) {
     grid-template-columns: auto auto auto;
   }
@@ -22,6 +32,7 @@
   background: $white;
   border-bottom: 1px solid $bg-color;
   padding: 0.5rem 15rem;
+  animation: fadeIn 0.2s ease-in;
   @media screen and (max-width: $mobile-break-point-default) {
     padding: 1rem;
   }

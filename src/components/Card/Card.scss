@@ -1,8 +1,18 @@
 @import "../../styles/variables";
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 section {
   background: $white;
   width: $card-width-default;
+  animation: fadeIn 0.5s ease-in;
   @media screen and (max-width: $mobile-break-point-default) {
     width: $card-width-mobile;
   }

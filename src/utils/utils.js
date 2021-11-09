@@ -1,3 +1,7 @@
+// API for data
+export const apiUrl =
+  "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json";
+
 // This function returns an unique array
 export const makeUniqueArray = (data) => {
   return [...new Set(data)];
