@@ -16,6 +16,7 @@ import {
   getGenreNameFromGenreId,
   getAllReleaseYear,
   checkForIncludes,
+  apiUrl,
 } from "../../utils";
 
 interface IGenre {
@@ -53,7 +54,7 @@ export const MainPage = () => {
     setIdGenreMapping(createIndexedGenreObjectMapping(genres));
   }, []);
 
-  const handleOnChange = useCallback(
+  const handleOnSearchChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       if (value) {
@@ -119,7 +120,7 @@ export const MainPage = () => {
           <h1>Music Video Listing</h1>
           {filteredData && (
             <Search
-              onChange={handleOnChange}
+              onChange={handleOnSearchChange}
               placeholder="Search artist, title, genre..."
             />
           )}
@@ -145,15 +146,17 @@ export const MainPage = () => {
   };
 
   const generateCard = () =>
-    filteredData.map((item: IVideos) => (
-      <Card
-        key={item.id}
-        image_url={item.image_url}
-        artist={item.artist}
-        title_label={item.title.toString()}
-        genre={getGenreNameFromGenreId(idGenreMapping, item.genre_id)}
-      />
-    ));
+    filteredData?.length > 0
+      ? filteredData.map((item: IVideos) => (
+          <Card
+            key={item.id}
+            image_url={item.image_url}
+            artist={item.artist}
+            title_label={item.title.toString()}
+            genre={getGenreNameFromGenreId(idGenreMapping, item.genre_id)}
+          />
+        ))
+      : "No results found";
 
   const getUserMessage = () => {
     return isError
@@ -163,13 +166,10 @@ export const MainPage = () => {
 
   // runs on componentDidMount
   useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/XiteTV/frontend-coding-exercise/main/data/dataset.json"
-    )
+    fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => manipulateData(data))
       .catch((e) => {
-        console.log(e);
         setIsError(true);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
